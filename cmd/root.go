@@ -8,6 +8,7 @@ package cmd
 import (
 	"os"
 
+	"github.com/sbtlocalization/sbt-itb/cmd/csv"
 	"github.com/sbtlocalization/sbt-itb/cmd/dat"
 	"github.com/spf13/cobra"
 )
@@ -30,5 +31,6 @@ func Execute() {
 }
 
 func init() {
+	rootCmd.AddCommand(csv.NewCommand())
 	rootCmd.AddCommand(dat.NewCommand())
 }
