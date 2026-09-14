@@ -11,9 +11,10 @@ func NewCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "dat",
 		Short: "Work with DAT archives",
-		Long:  "Inspect and extract entries stored in DAT archives.",
+		Long:  "Inspect, extract, create, and update DAT archives.",
 	}
 	cmd.AddCommand(NewListCommand())
 	cmd.AddCommand(NewExtractCommand())
+	cmd.AddCommand(NewPackCommand())
 	return cmd
 }
