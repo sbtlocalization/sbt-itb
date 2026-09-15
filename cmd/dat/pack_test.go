@@ -279,7 +279,8 @@ func readArchive(t *testing.T, path string) []archiveEntry {
 	entries := make([]archiveEntry, 0, len(archive.Files))
 	for i, file := range archive.Files {
 		if file.OfsMeta == 0 {
-			t.Fatalf("archive slot %d is empty", i+1)
+			entries = append(entries, archiveEntry{empty: true})
+			continue
 		}
 		meta, err := file.Meta()
 		if err != nil {

@@ -16,6 +16,7 @@ type Entry struct {
 	Path     string
 	Size     uint64
 	OpenBody func() (io.ReadCloser, error)
+	Empty    bool
 }
 
 type ProgressFunc func(current, total int, path string) error
@@ -33,7 +34,17 @@ func Write(writer io.Writer, entries []Entry, progress ProgressFunc) error {
 			return fmt.Errorf("failed to write archive entry %q metadata offset: %w", entries[i].Path, err)
 		}
 	}
-	for i, entry := range entries {
+	total := len(entries)
+	for _, entry := range entries {
+		if entry.Empty {
+			total--
+		}
+	}
+	current := 0
+	for _, entry := range entries {
+		if entry.Empty {
+			continue
+		}
 		if err := writeUint32(writer, uint32(entry.Size)); err != nil {
 			return fmt.Errorf("failed to write archive entry %q body length: %w", entry.Path, err)
 		}
@@ -46,8 +57,9 @@ func Write(writer io.Writer, entries []Entry, progress ProgressFunc) error {
 		if err := writeBody(writer, entry); err != nil {
 			return err
 		}
+		current++
 		if progress != nil {
-			if err := progress(i+1, len(entries), entry.Path); err != nil {
+			if err := progress(current, total, entry.Path); err != nil {
 				return err
 			}
 		}
@@ -62,6 +74,9 @@ func metadataOffsets(entries []Entry) ([]uint32, error) {
 	offset := uint64(4) + uint64(len(entries))*4
 	offsets := make([]uint32, len(entries))
 	for i, entry := range entries {
+		if entry.Empty {
+			continue
+		}
 		if uint64(len(entry.Path)) > math.MaxUint32 {
 			return nil, fmt.Errorf("archive entry %q path length exceeds DAT uint32 limit", entry.Path)
 		}

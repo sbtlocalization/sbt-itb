@@ -112,7 +112,7 @@ func indexArchiveSourceTree(inputPath, outputPath string) ([]datarchive.Entry, e
 		if walkErr != nil {
 			return fmt.Errorf("failed to access source path %s: %w", sourcePath, walkErr)
 		}
-		if entry.IsDir() {
+		if entry.IsDir() || filepath.Base(sourcePath) == ".DS_Store" {
 			return nil
 		}
 		info, err := entry.Info()
@@ -136,6 +136,7 @@ func indexArchiveSourceTree(inputPath, outputPath string) ([]datarchive.Entry, e
 		if info.Size() < 0 {
 			return fmt.Errorf("source path %s has invalid size %d", sourcePath, info.Size())
 		}
+
 		pathToOpen := sourcePath
 		entries = append(entries, datarchive.Entry{
 			Path: archivePath,
