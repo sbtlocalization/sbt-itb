@@ -1,5 +1,6 @@
 out/*
 /sbt-itb
+/sbt-itb-mini*
 
 ### Go
 # Binaries for programs and plugins
