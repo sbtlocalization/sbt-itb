@@ -1,3 +1,8 @@
+// SPDX-FileCopyrightText: © 2026 SBT Localization https://sbt.localization.com.ua
+// SPDX-FileContributor: Serhii Olendarenko <sergey.olendarenko@gmail.com>
+//
+// SPDX-License-Identifier: GPL-3.0-only
+
 module github.com/sbtlocalization/sbt-itb
 
 go 1.27

@@ -1,0 +1,14 @@
+version = 1
+
+[[annotations]]
+path = ["go.mod", "go.sum"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "© 2026 SBT Localization https://sbt.localization.com.ua"
+SPDX-FileContributor = "Serhii Olendarenko <sergey.olendarenko@gmail.com>"
+SPDX-License-Identifier = "GPL-3.0-only"
+
+[[annotations]]
+path = ["parser/*.go"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "© 2026 SBT Localization https://sbt.localization.com.ua"
+SPDX-License-Identifier = "GPL-3.0-only"
