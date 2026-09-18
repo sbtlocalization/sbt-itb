@@ -36,6 +36,6 @@ go build ./mini
 
 Translations are stored in CSV files, and we built a separate `csv merge` command for this purpose, which in the end turned out not to be used, although it is still present in the program.
 
-# License
+## License
 
 Almost all of the code is available under the [GPL-3.0](./LICENSES/GPL-3.0-only.txt) license. The exception is the description of the [parser](./kaitai/ftl_dat.ksy) for `dat` files for Kaitai Struct, available under the [CC0-1.0](./LICENSES/CC0-1.0.txt) license.
