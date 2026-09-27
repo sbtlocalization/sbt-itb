@@ -16,7 +16,7 @@ import (
 
 const (
 	sourceTreeFolderName = "ukr"
-	windowsSubfolder     = "resources"
+	resourcesSubfolder   = "resources"
 	archiveFileName      = "resource.dat"
 )
 
@@ -59,8 +59,8 @@ func platformPaths(baseDir string) (sourceTreePath, archivePath string) {
 	switch runtime.GOOS {
 	case "darwin":
 		return filepath.Join(baseDir, sourceTreeFolderName), filepath.Join(baseDir, archiveFileName)
-	case "windows":
-		resourcesDir := filepath.Join(baseDir, windowsSubfolder)
+	case "windows", "linux":
+		resourcesDir := filepath.Join(baseDir, resourcesSubfolder)
 		return filepath.Join(resourcesDir, sourceTreeFolderName), filepath.Join(resourcesDir, archiveFileName)
 	default:
 		return "", ""
